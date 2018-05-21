@@ -1,0 +1,38 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+using namespace std;
+
+double f(double x){
+    return pow(x,2.0)-4;
+}
+double deriv(double x){
+    return 2*x;
+}
+int main()
+{
+    double x0,x1,h,epsilon;
+    int iteration=0;
+    cout<<"enter the initial value and error bound: "<<endl;
+    cin>>x0>>epsilon;
+    if(deriv(x0)!=0){
+        cout<<endl<<"itr\t"<<"x0\t"<<"x1\t"<<"h\t"<<endl;
+        do{
+            h = f(x0)/deriv(x0)*1.0;
+            x1 = x0 - h;
+            if(iteration>20){
+                cout<<endl<<"value is oscillating: "<<endl;
+                return 0;
+            }
+            cout<<iteration<<"\t"<<x0<<"\t"<<x1<<"\t"<<h<<"\t"<<endl;
+            x0 = x1;
+            iteration++;
+        }while(fabs(h)>=epsilon && fabs(deriv(x0))>=0.000001);
+        cout<<endl<<"the root is: "<<x1<<endl;
+    }else{
+        cout<<endl<<"the derivative is zero.."<<endl;
+    }
+   
+   return 0;
+}
